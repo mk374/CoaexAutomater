@@ -6,16 +6,15 @@ Created on Nov 22, 2018
 from selenium import webdriver
 import time
 from selenium.webdriver.common.action_chains import ActionChains
-from selenium.webdriver.chrome.options import Options
 
 from tkinter import *
 
 import re
 
 
-options = Options()
 
-driver = webdriver.Chrome(executable_path='/usr/local/bin/chromedriver', chrome_options = options)
+
+driver = webdriver.Chrome()
 
 
 """
