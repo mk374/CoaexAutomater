@@ -1,14 +1,9 @@
-'''
-Created on Nov 22, 2018
-
-@author: minsookim
-'''
 from selenium import webdriver
 import time
 from selenium.webdriver.common.action_chains import ActionChains
 
 from tkinter import *
-
+import datetime
 
 import re
 from doctest import master
@@ -89,41 +84,21 @@ class Window(Frame):
     def client_exit(self):
         exit()
     
-    # run the coaex application actual one    
-    def coaex_run(self):
-        #open chrome
-        driver = webdriver.Chrome()
-        driver.get("http://www.coaex.io/login")
-  
-        time.sleep(2)
-  
-        emailBox = driver.find_element_by_xpath('//*[@id="email"]')
-  
-        pwdBox = driver.find_element_by_xpath('//*[@id="pwd"]')
-  
-        emailBox.send_keys("mail4hang@yahoo.com")
-        pwdBox.send_keys("Kim10190820")
-  
-        loginBtn = driver.find_element_by_xpath('/html/body/div/form/div[5]/div[2]/button')
-        loginBtn.click()
-  
-        time.sleep(10)
-  
-        okBtn = driver.find_element_by_xpath('/html/body/div[2]/div/div[3]/button[2]')
-        okBtn.click()
-        
+
     # checking live cryptocurrency market
     def test_run(self):
         driver = webdriver.Chrome()
         driver.get ("https://cryptowat.ch")
+        time.sleep(3)
+        
+        default = True
+        
+        
+        while(default):
+            bitcoinPrice = driver.find_element_by_xpath('//*[@id="asset-cards"]/div[2]/div[1]/div/div/div[2]/div/div[1]/div/div[2]/div[1]/span[2]/span[2]').text
+            bitLabel = Label(self.master, text = bitcoinPrice)
+            bitLabel.pack()
 
-        #get live bitcoin prices
-        time.sleep (3)
-        
-        #while loop to update the label in TK every 5 seconds
-        bitcoinPrice = driver.find_element_by_xpath('//*[@id="asset-cards"]/div[2]/div[1]/div/div/div[2]/div/div[1]/div/div[2]/div[1]/span[2]/span[2]')
-        
-        
         
 root = Tk()
 #size of the window
