@@ -7,7 +7,7 @@ import datetime
 
 import re
 from doctest import master
-
+from CryptoBotAssist import CryptoBotAssist
 
 """
 setting up user interface
@@ -91,14 +91,24 @@ class Window(Frame):
         driver.get ("https://cryptowat.ch")
         time.sleep(3)
         
-        default = True
+#         root2 = Tk()
+#         root2.geomtery("500x200")
+#         app  = CryptoBotAssist((root2))
+#         
+#         root2.mainloop()
         
+        default = 3
+        listbox = Listbox(self.master)
+        listbox.pack(fill=BOTH, expand=1)
         
-        while(default):
+        #implement while loop so that it will work
+        while(default > 0):
             bitcoinPrice = driver.find_element_by_xpath('//*[@id="asset-cards"]/div[2]/div[1]/div/div/div[2]/div/div[1]/div/div[2]/div[1]/span[2]/span[2]').text
-            bitLabel = Label(self.master, text = bitcoinPrice)
-            bitLabel.pack()
-
+            listbox.insert(END, bitcoinPrice)
+            time.sleep(2)
+            default = default - 1
+        print("ahhhh shoot")
+        
         
 root = Tk()
 #size of the window
