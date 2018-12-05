@@ -43,40 +43,68 @@ class WindowChild:
         self.master = master
         self.frame = tk.Frame(self.master)
         self.quitButton = tk.Button(self.frame, text = 'Quit', width = 25, command = self.close_windows)
+
+
         
-        #sets up the website
+        # #sets up the website
         self.crypto_setup()
+        self.COA_BTC_setup()
 
-        #initializes the counters
-        self.crypto_setup_threading_test_back()
+        # #initializes the counters
+        # self.crypto_setup_threading_test_back()
 
-        #set up our coins
-        self.setup_coin_base()
-        #sets up our wallet
-        self.setup_Wallet()
+        # #set up our coins
+        # self.setup_coin_base()
+        # #sets up our wallet
+        # self.setup_Wallet()
         
 
-        #setting up the buttons
-        #bitcoinPrice = driver.find_element_by_xpath('//*[@id="asset-cards"]/div[2]/div[1]/div/div/div[2]/div/div[1]/div/div[2]/div[1]/span[2]/span[2]').text
-        self.testButton = tk.Button(self.frame, text = 'TESTING', width = 30, command = self.crypto_threading_test())
+        # #setting up the buttons
+        # #bitcoinPrice = driver.find_element_by_xpath('//*[@id="asset-cards"]/div[2]/div[1]/div/div/div[2]/div/div[1]/div/div[2]/div[1]/span[2]/span[2]').text
+        # self.testButton = tk.Button(self.frame, text = 'TESTING', width = 30, command = self.crypto_threading_test())
 
-        self.beginTradingButton = tk.Button(self.frame, text = 'BEGIN TRADING AND SELLING', width = 40, command = self.begin_trading_selling())
-        #self.testButton = tk.Button(self.frame, text = 'TESTING', width = 30, command = self.threading_test)
+        # self.beginTradingButton = tk.Button(self.frame, text = 'BEGIN TRADING AND SELLING', width = 40, command = self.begin_trading_selling())
+        # #self.testButton = tk.Button(self.frame, text = 'TESTING', width = 30, command = self.threading_test)
 
-        self.testButton.pack()
-        self.stopButton = tk.Button(self.frame, text = 'STOP', width = 30, command = self.tester_exit)
+        # self.testButton.pack()
+        # self.stopButton = tk.Button(self.frame, text = 'STOP', width = 30, command = self.tester_exit)
 
-        self.beginTradingButton.pack()
-        self.stopButton.pack()
-        self.quitButton.pack()
+        # self.beginTradingButton.pack()
+        # self.stopButton.pack()
+        # self.quitButton.pack()
 
         self.frame.pack()
     
+    # run the coaex application actual one   
+    
+        
     #opens up the website
     def crypto_setup(self):
         self.driver = webdriver.Chrome()
-        self.driver.get("https://cryptowat.ch")
+        self.driver.get("http://www.coaex.io/login")
+  
+        time.sleep(2)
+  
+        emailBox = self.driver.find_element_by_xpath('//*[@id="email"]')
+  
+        pwdBox = self.driver.find_element_by_xpath('//*[@id="pwd"]')
+  
+        emailBox.send_keys("mail4hang@yahoo.com")
+        pwdBox.send_keys("Kim10190820")
+  
+        loginBtn = self.driver.find_element_by_xpath('/html/body/div/form/div[5]/div[2]/button')
+        loginBtn.click()
+  
+        time.sleep(10)
+  
+        okBtn = self.driver.find_element_by_xpath('/html/body/div[2]/div/div[3]/button[1]')
+        okBtn.click()
 
+        enterCOABTC = self.driver.find_element_by_xpath('//*[@id="coinCategoriesSiseBodyId"]/tr[1]/td[2]/h4/span[1]')
+        enterCOABTC.click()
+
+
+  
     #RETURNS THE CURRENT VALUE OF THE COIN
     def crypto_setup_back(self):
         return self.driver.find_element_by_xpath('//*[@id="asset-cards"]/div[2]/div[1]/div/div/div[2]/div/div[1]/div/div[2]/div[1]/span[2]/span[2]').text
@@ -196,40 +224,6 @@ class WindowChild:
     def tester_exit(self):
         self.setter = False
     
-    # #command or method that initializes the counters
-    # def threading_test_back(self):
-    #     self.setter = True
-    #     self.generalCounter = 0
-    #     self.counter0Sec = 0
-    #     self.counter5Sec = 0
-    #     self.var = StringVar()
-    #     self.label0Sec = tk.Label(self.frame, textvariable = self.var)
-    #     self.var2 = StringVar()
-    #     self.label5Sec = tk.Label(self.frame, textvariable = self.var2)
-    #     self.var.set("0 sec counter" + str(self.counter0Sec))
-    #     self.var2.set("5 sec counter" + str(self.counter5Sec))
-    #     self.label0Sec.pack()
-    #     self.label5Sec.pack()
-        
-    # #updates the counters
-    # def threading_test(self):
-    #     if (self.setter == True):
-    #         if(self.counter5Sec < 5):
-    #             self.counter5Sec += 1
-    #             self.var2.set("5 sec counter" + str(self.counter5Sec))
-    #         else:
-    #             self.update_counter()
-                
-    #         self.master.after(1000, self.threading_test)
-            
-    # #used in threading_test to update the counters and print
-    # def update_counter(self):
-    #     self.counter0Sec += 1
-    #     self.counter5Sec += 1
-    #     self.var.set("0 sec counter" + str(self.counter0Sec))
-    #     self.var2.set("5 sec counter" + str(self.counter5Sec))
-        
-    #self explanatory, destroys the window
     def close_windows(self):
         self.master.destroy()
 
